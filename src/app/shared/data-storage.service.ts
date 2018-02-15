@@ -20,7 +20,6 @@ export class DataStorageService {
   ) {}
 
   storeRecipes() {
-    const token = this.authService.getToken();
     // const headers = new HttpHeaders().set('Auth', 'adfsfsdfds')
 
     // return this.httpClient.put(
@@ -32,6 +31,7 @@ export class DataStorageService {
     //     // headers: headers
     //   }
     // );
+
     const req = new HttpRequest(
       'PUT',
       'https://ng-shopping.firebaseio.com/recipes.json',
@@ -42,19 +42,14 @@ export class DataStorageService {
   }
 
   getRecipes() {
-    const token = this.authService.getToken();
-
     this.httpClient
       // .get<Recipe[]>(
       //   "https://ng-shopping.firebaseio.com/recipes.json?auth=" + token
       // )
-      .get<Recipe[]>(
-        'https://ng-shopping.firebaseio.com/recipes.json?auth=' + token,
-        {
-          observe: 'body',
-          responseType: 'json'
-        }
-      )
+      .get<Recipe[]>('https://ng-shopping.firebaseio.com/recipes.json', {
+        observe: 'body',
+        responseType: 'json'
+      })
       .map(recipes => {
         console.log(recipes);
         for (const recipe of recipes) {
