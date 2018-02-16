@@ -22,11 +22,14 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     console.log('Intercepted!', req);
     // const copyReq = req.clone({headers: req.headers.set('', '')});
-    return this.store.select('auth').switchMap((authState: fromAuth.State) => {
-      const copyReq = req.clone({
-        params: req.params.set('auth', authState.token)
+    return this.store
+      .select('auth')
+      .take(1)
+      .switchMap((authState: fromAuth.State) => {
+        const copyReq = req.clone({
+          params: req.params.set('auth', authState.token)
+        });
+        return next.handle(copyReq);
       });
-      return next.handle(copyReq);
-    });
   }
 }
