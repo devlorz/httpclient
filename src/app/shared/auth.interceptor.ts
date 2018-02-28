@@ -8,6 +8,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/take';
 
 import * as fromApp from '../store/app.reducers';
 import * as fromAuth from '../auth/store/auth.reducers';

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
 import { Recipe } from '../recipe.model';
-import { RecipeService } from '../recipe.service';
 import * as fromRecipe from '../store/recipe.reducers';
 
 @Component({
@@ -16,7 +15,6 @@ export class RecipeListComponent implements OnInit {
   recipeState: Observable<fromRecipe.State>;
 
   constructor(
-    private recipeService: RecipeService,
     private router: Router,
     private route: ActivatedRoute,
     private store: Store<fromRecipe.FeatureState>
